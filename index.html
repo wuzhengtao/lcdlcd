@@ -128,22 +128,22 @@
 			},
 			methods: {
 				changeArea() {
-					this.area = ((this.length * this.width) / 10000).toFixed(3);
+					this.area = Number(((this.length * this.width) / 10000).toFixed(3));
 				},
 				changeCost() {
-					this.paperPrice = ((this.area * this.weight * this.cost) / 1000000).toFixed(3);
+					this.paperPrice = Number(((this.area * this.weight * this.cost) / 1000000).toFixed(3));
 				},
 				changePrintAns() {
-					this.printAns = (this.print / this.quantity).toFixed(3);
+					this.printAns = Number((this.print / this.quantity).toFixed(3));
 				},
 				changeSkinAns() {
-					this.skinAns = (this.skin * this.area).toFixed(3);
+					this.skinAns = Number((this.skin * this.area).toFixed(3));
 				},
 				changePlateAns() {
-					this.plateAns = (this.plate * this.area).toFixed(3);
+					this.plateAns = Number((this.plate * this.area).toFixed(3));
 				},
 				changeKnifeAns() {
-					this.knifeAns = (this.knife / this.quantity).toFixed(3);
+					this.knifeAns = Number((this.knife / this.quantity).toFixed(3));
 				},
 				changePrice() {
 					this.price =
