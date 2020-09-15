@@ -54,27 +54,28 @@
         <h1 class="mdui-text-color-theme">
             选择箱型：
             <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box">
-                <option value="1">1.立箱</option>
-                <option value="2">2.小盖卧箱</option>
-                <option value="3">3.大盖卧箱</option>
-                <option value="4">4.平铺六支对箱</option>
-                <option value="5">5.鲅鱼箱</option>
-                <option value="6">6.飞机盒</option>
-                <option value="7">7.天盖</option>
-                <option value="8">8.地盖</option>
+                <option value="1">1.一片成箱立箱</option>
+                <option value="2">2.一片成箱立箱</option>
+                <option value="3">3.小盖卧箱</option>
+                <option value="4">4.大盖卧箱</option>
+                <option value="5">5.平铺六支对箱</option>
+                <option value="6">6.鲅鱼箱</option>
+                <option value="7">7.飞机盒</option>
+                <option value="8">8.天盖</option>
+                <option value="9">9.地盖</option>
             </select>
         </h1>
         <div class="mdui-textfield mdui-textfield-floating-label">
             <label class="mdui-textfield-label">长</label>
-            <input class="mdui-textfield-input" id="box-length" onblur="checkNum()"/>
+            <input class="mdui-textfield-input" id="box-length" onblur="checkNum()" />
         </div>
         <div class="mdui-textfield mdui-textfield-floating-label">
             <label class="mdui-textfield-label">宽</label>
-            <input class="mdui-textfield-input" id="box-width" onblur="checkNum()"/>
+            <input class="mdui-textfield-input" id="box-width" onblur="checkNum()" />
         </div>
         <div class="mdui-textfield mdui-textfield-floating-label">
             <label class="mdui-textfield-label">高</label>
-            <input class="mdui-textfield-input" id="box-height" onblur="checkNum()"/>
+            <input class="mdui-textfield-input" id="box-height" onblur="checkNum()" />
         </div>
         <div class="mdui-row">
             <div class="mdui-col-xs-8">
@@ -91,71 +92,44 @@
     <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"></script>
     <script>
-
-    var $ = mdui.$;
-    function checkNum() {
-        ids = ["box-length","box-width","box-height"]
-        for(i in ids) {
-            element = document.getElementById(ids[i]).value
-            if (isNaN(element)) {
-                num = parseInt(i) + 1
-                init()
-                alert("第"+ num +"个空请输入数字")
+        var $ = mdui.$;
+        function checkNum() {
+            ids = ["box-length", "box-width", "box-height"]
+            for (i in ids) {
+                element = document.getElementById(ids[i]).value
+                if (isNaN(element)) {
+                    num = parseInt(i) + 1
+                    init()
+                    alert("第" + num + "个空请输入数字")
+                }
             }
         }
-    }
-
-    function caculator() {
-        A = parseInt(document.getElementById("box-length").value)
-        B = parseInt(document.getElementById("box-width").value)
-        C = parseInt(document.getElementById("box-height").value)
-
-        sele = parseInt(document.getElementById("box").value)
-
-        length_ratio = [
-            [1,1,0,40],
-            [1,1,0,40],
-            [1,1,0,40],
-            [1,1,0,40],
-            [1,0,4,32],
-            [0,2,3,21],
-            [1,0,4,71],
-            [0,1,4,47]
-        ]
-
-        width_ratio = [
-            [0,1,1,20],
-            [0,1,1,20],
-            [1,0,1,20],
-            [0,1,1,20],
-            [0,2,2,20],
-            [1,0,4,42],
-            [1,0,4,34],
-            [0,1,4,20]
-        ]
-
-        length_value = length_ratio[sele-1]
-        width_value = width_ratio[sele-1]
-
-        length = A*length_value[0] + B*length_value[1] + C*length_value[2] + length_value[3]
-        width = A*width_value[0] + B*width_value[1] + C*width_value[2] + width_value[3]
-
-        if(sele == 1 && (A+B)<50) {
-            length += A + B
+        function caculator() {
+            A = parseInt(document.getElementById("box-length").value)
+            B = parseInt(document.getElementById("box-width").value)
+            C = parseInt(document.getElementById("box-height").value)
+            sele = parseInt(document.getElementById("box").value)
+            ratio = [
+                [2, 2, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 1, 0, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 0, 4, 32, 0, 2, 2, 20],
+                [0, 2, 3, 21, 1, 0, 4, 42],
+                [1, 0, 4, 67, 0, 1, 4, 51],
+                [1, 0, 4, 34, 0, 1, 4, 24]
+            ]
+            value = ratio[sele - 1]
+            length = A * value[0] + B * value[1] + C * value[2] + value[3]
+            width = A * value[4] + B * value[5] + C * value[6] + value[7]
+            document.getElementById("ans").innerText = "预估面积：长 " + length + "，幅宽" + width
         }
-
-        document.getElementById("ans").innerText = "预估面积：长 "+length+"，幅宽"+ width
-
-    }
-
-    function init() {
-        document.getElementById("ans").innerText = "预估面积：无"
-    }
-
+        function init() {
+            document.getElementById("ans").innerText = "预估面积：无"
+        }
     </script>
     <script src="//cdn.w3cbus.com/mdui.org/docs/assets/docs/js/docs-v1.js"></script>
-
-
 </body>
 
 </html>
