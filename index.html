@@ -1,60 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cmn-Hans">
 
 <head>
-	<title>烟台壹盒包装计价系统</title>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<link rel="stylesheet" href="./css/index.css">
-	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
-	<!-- 引入样式 -->
-	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-	<!-- 引入组件库 -->
-	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- MDUI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css"
+        integrity="sha384-2PJ2u4NYg6jCNNpv3i1hK9AoAqODy6CdiC+gYiL2DVx+ku5wzJMFNdE3RoWfBIRP" crossorigin="anonymous" />
+    <title>烟台壹盒包装制品有限公司</title>
+    <!-- MDUI JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"
+        integrity="sha384-aB8rnkAu/GBsQ1q6dwTySnlrrbhqDwrDnpVHR2Wgm8pWLbwUnzDcIROX3VvCbaK+"
+        crossorigin="anonymous"></script>
+
 </head>
 
-<body>
-	<div id="app">
-		<h1>烟台壹盒包装计价系统</h1>
-		<form>
-			数量：<input type="number" name="quantity" v-model="quantity"><br>
-			面积：<input type="number" name="length" step="0.001" placeholder="长" v-model="length">
-			X
-			<input type="number" name="width" step="0.001" placeholder="宽" v-model="width">(cm)
-			=
-			<label>{{ area }}</label><label>m<sup>2</sup></label><br>
-			面纸：<input type="number" name="area" step="0.001" placeholder="面积" readonly="readonly" v-model="area">
-			X <input type="number" name="weight" step="0.001" placeholder="克重" v-model="weight">
-			X <input type="number" name="cost" step="0.001" placeholder="单价" v-model="cost">
-			=
-			<label>{{ paperPrice }}</label><br>
-			印刷：<input type="number" name="print" step="0.001" v-model="print">
-			=
-			<label>{{ printAns }}</label>/张<br>
-			膜：<input type="number" name="skin" step="0.001" v-model="skin">
-			=
-			<label>{{ skinAns }}</label>/张<br>
-			纸板：<input type="number" name="plate" step="0.001" v-model="plate">
-			=
-			<label>{{ plateAns }}</label>/张<br>
+<body
+    class="mdui-drawer-body-left mdui-appbar-with-toolbar  mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto">
+    <header class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-color-theme">
+            <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-drawer="{target: '#main-drawer', swipe: true}"><i class="mdui-icon material-icons">menu</i></span>
+            <a href="../" class="mdui-typo-headline mdui-hidden-xs">烟台壹盒包装制品有限公司</a>
+            <!-- <a href="./" class="mdui-typo-title">面积计算</a> -->
+            <div class="mdui-toolbar-spacer"></div>
+            <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
+                mdui-dialog="{target: '#dialog-docs-theme'}" mdui-tooltip="{content: '设置主题'}"><i
+                    class="mdui-icon material-icons">color_lens</i></span>
+        </div>
+    </header>
 
-			刀板：<input type="number" name="knife" step="0.001" v-model="knife">
-			=
-			<label>{{ knifeAns }}</label>/个<br>
-			加工：<input type="number" name="handling" step="0.001" v-model="handling">
-			格套：<input type="number" name="pattern" step="0.001" v-model="pattern">
-			其他：<input type="number" name="other" step="0.001" v-model="other"><br><br>
-			单价：{{ price }} 元
-		</form>
-		<a href="./boxarea.html" target="_blank" rel="noopener noreferrer">next</a>
-	</div>
+    <!-- <div class="mdui-drawer" id="main-drawer">
+        <div class="mdui-list" mdui-collapse="{accordion: true}" style="margin-bottom: 76px;">
+            <div class="mdui-collapse-item ">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">attach_money</i>
+                    <div class="mdui-list-item-content">计价系统</div>
+                </div>
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">move_to_inbox</i>
+                    <div class="mdui-list-item-content">面积计算</div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 
-	<script src="./js/index.js"></script>
+    <a id="anchor-top"></a>
+
+    <div class="mdui-container">
+        <h1>面积计算</h1>
+        <h1 class="mdui-text-color-theme">
+            选择箱型：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box">
+                <option value="1">1.一片成箱立箱</option>
+                <option value="2">2.两片成箱立箱</option>
+                <option value="3">3.小盖卧箱</option>
+                <option value="4">4.大盖卧箱</option>
+                <option value="5">5.平铺六支对箱</option>
+                <option value="6">6.鲅鱼箱</option>
+                <option value="7">7.飞机盒</option>
+                <option value="8">8.天盖</option>
+                <option value="9">9.地盖</option>
+            </select>
+        </h1>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">长</label>
+            <input class="mdui-textfield-input" id="box-length" onblur="checkNum()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">宽</label>
+            <input class="mdui-textfield-input" id="box-width" onblur="checkNum()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">高</label>
+            <input class="mdui-textfield-input" id="box-height" onblur="checkNum()" />
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="ans">预估面积：无</span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculator()">开始计算</button>
+            </div>
+        </div>
+        <div class="mdui-divider" style="margin-top:10pt"></div>
+        <h1>价格计算</h1>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">数量</label>
+            <input class="mdui-textfield-input" id="price-number"/>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">面积：长</label>
+                <input class="mdui-textfield-input" id="price-length"/>
+            </div>
+            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">面积：宽</label>
+                <input class="mdui-textfield-input" id="price-width"/>
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">面纸：重量</label>
+                <input class="mdui-textfield-input" id="price-paper-weight"/>
+            </div>
+            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">面纸：费用</label>
+                <input class="mdui-textfield-input" id="price-paper-cost"/>
+            </div>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">印刷</label>
+            <input class="mdui-textfield-input" id="price-print"/>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">膜</label>
+            <input class="mdui-textfield-input" id="price-skin"/>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">纸张</label>
+            <input class="mdui-textfield-input" id="price-paper"/>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">刀版</label>
+            <input class="mdui-textfield-input" id="price-knife"/>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">加工</label>
+            <input class="mdui-textfield-input" id="price-work"/>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">格套</label>
+            <input class="mdui-textfield-input" id="price-pattern"/>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">其他</label>
+            <input class="mdui-textfield-input" id="price-other"/>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="price">预估价格：无</span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="price_caculator()">开始计算</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/holderjs@2.9.7/holder.min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"></script>
+    <script>
+        var $ = mdui.$;
+        function checkNum() {
+            ids = ["box-length", "box-width", "box-height"]
+            for (i in ids) {
+                element = document.getElementById(ids[i]).value
+                if (isNaN(element)) {
+                    num = parseInt(i) + 1
+                    init()
+                    alert("第" + num + "个空请输入数字")
+                }
+            }
+        }
+        function caculator() {
+            A = parseInt(document.getElementById("box-length").value)
+            B = parseInt(document.getElementById("box-width").value)
+            C = parseInt(document.getElementById("box-height").value)
+            sele = parseInt(document.getElementById("box").value)
+            ratio = [
+                [2, 2, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 1, 0, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 0, 4, 32, 0, 2, 2, 20],
+                [0, 2, 3, 21, 1, 0, 4, 42],
+                [1, 0, 4, 67, 0, 1, 4, 51],
+                [1, 0, 4, 34, 0, 1, 4, 24]
+            ]
+            value = ratio[sele - 1]
+            length = A * value[0] + B * value[1] + C * value[2] + value[3]
+            width = A * value[4] + B * value[5] + C * value[6] + value[7]
+            document.getElementById("ans").innerText = "预估面积：长 " + length + "，幅宽" + width
+        }
+
+        function price_caculator() {
+            num = Number(document.getElementById("price-number").value)
+
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+
+            weight = Number(document.getElementById("price-paper-weight").value)
+            cost = Number(document.getElementById("price-paper-cost").value)
+            paper = Number(((area * weight * cost) / 1000000).toFixed(3));
+
+            print = Number(document.getElementById("price-print").value)
+            skin = Number(document.getElementById("price-skin").value)
+            plate = Number(document.getElementById("price-paper").value)
+            knife = Number(document.getElementById("price-knife").value)
+            work = Number(document.getElementById("price-work").value)
+            pattern = Number(document.getElementById("price-pattern").value)
+            other = Number(document.getElementById("price-other").value)
+
+            price =
+                (
+                    this.paper +
+                    Number((print / num).toFixed(3)) +
+                    Number((skin * area).toFixed(3)) +
+                    Number((plate * area).toFixed(3)) +
+                    Number((knife / num).toFixed(3)) +
+                    work * 1.0 +
+                    pattern * 1.0 +
+                    other * 1.0
+                ).toFixed(3);
+            document.getElementById("price").innerText = "预估价格： " + price + " 元";
+        }
+        function init() {
+            document.getElementById("ans").innerText = "预估面积：无"
+            document.getElementById("price").innerText = "预估价格：无"
+        }
+    </script>
+    <script src="//cdn.w3cbus.com/mdui.org/docs/assets/docs/js/docs-v1.js"></script>
 </body>
 
 </html>
