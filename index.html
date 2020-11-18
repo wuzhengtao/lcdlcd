@@ -90,55 +90,93 @@
         <h1>价格计算</h1>
         <div class="mdui-textfield mdui-textfield-floating-label">
             <label class="mdui-textfield-label">数量</label>
-            <input class="mdui-textfield-input" id="price-number"/>
+            <input class="mdui-textfield-input" id="price-number" />
         </div>
         <div class="mdui-row">
-            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+            <div class="mdui-col-xs-2">
+                <h2>面纸费用：</h2>
+            </div>
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">面积：长</label>
-                <input class="mdui-textfield-input" id="price-length"/>
+                <input class="mdui-textfield-input" id="price-length" onblur="computePaper()"/>
             </div>
-            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">面积：宽</label>
-                <input class="mdui-textfield-input" id="price-width"/>
+                <input class="mdui-textfield-input" id="price-width" onblur="computePaper()" />
+            </div>
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">克重</label>
+                <input class="mdui-textfield-input" id="price-paper-weight" onblur="computePaper()" />
+            </div>
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">费用</label>
+                <input class="mdui-textfield-input" id="price-paper-cost" onblur="computePaper()" />
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="paper-price">= 0 元/个</h2>
             </div>
         </div>
         <div class="mdui-row">
-            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
-                <label class="mdui-textfield-label">面纸：重量</label>
-                <input class="mdui-textfield-input" id="price-paper-weight"/>
+            <div class="mdui-col-xs-2">
+                <h2>印刷：</h2>
             </div>
-            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
-                <label class="mdui-textfield-label">面纸：费用</label>
-                <input class="mdui-textfield-input" id="price-paper-cost"/>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">印刷</label>
+                <input class="mdui-textfield-input" id="price-print" onblur="computePrint()"/>
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="print-price">= 0 元/个</h2>
             </div>
         </div>
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">印刷</label>
-            <input class="mdui-textfield-input" id="price-print"/>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>膜：</h2>
+            </div>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">膜</label>
+                <input class="mdui-textfield-input" id="price-skin" onblur="computeSkin()" />
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="skin-price">= 0 元/个</h2>
+            </div>
         </div>
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">膜</label>
-            <input class="mdui-textfield-input" id="price-skin"/>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>纸张：</h2>
+            </div>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">纸张</label>
+                <input class="mdui-textfield-input" id="price-plate" onblur="computePlate()"/>
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="plate-price">= 0 元/个</h2>
+            </div>
         </div>
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">纸张</label>
-            <input class="mdui-textfield-input" id="price-paper"/>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>刀版：</h2>
+            </div>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">刀版</label>
+                <input class="mdui-textfield-input" id="price-knife" onblur="computeKnife()"/>
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="knife-price">= 0 元/个</h2>
+            </div>
         </div>
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">刀版</label>
-            <input class="mdui-textfield-input" id="price-knife"/>
-        </div>
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">加工</label>
-            <input class="mdui-textfield-input" id="price-work"/>
-        </div>
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">格套</label>
-            <input class="mdui-textfield-input" id="price-pattern"/>
-        </div>
-        <div class="mdui-textfield mdui-textfield-floating-label">
-            <label class="mdui-textfield-label">其他</label>
-            <input class="mdui-textfield-input" id="price-other"/>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">加工</label>
+                <input class="mdui-textfield-input" id="price-work" />
+            </div>
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">格套</label>
+                <input class="mdui-textfield-input" id="price-pattern" />
+            </div>
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">其他</label>
+                <input class="mdui-textfield-input" id="price-other" />
+            </div>
         </div>
         <div class="mdui-row">
             <div class="mdui-col-xs-8">
@@ -163,7 +201,6 @@
                 if (isNaN(element)) {
                     num = parseInt(i) + 1
                     init()
-                    alert("第" + num + "个空请输入数字")
                 }
             }
         }
@@ -202,7 +239,7 @@
 
             print = Number(document.getElementById("price-print").value)
             skin = Number(document.getElementById("price-skin").value)
-            plate = Number(document.getElementById("price-paper").value)
+            plate = Number(document.getElementById("price-plate").value)
             knife = Number(document.getElementById("price-knife").value)
             work = Number(document.getElementById("price-work").value)
             pattern = Number(document.getElementById("price-pattern").value)
@@ -220,6 +257,45 @@
                     other * 1.0
                 ).toFixed(3);
             document.getElementById("price").innerText = "预估价格： " + price + " 元";
+        }
+        function computePaper() {
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+
+            weight = Number(document.getElementById("price-paper-weight").value)
+            cost = Number(document.getElementById("price-paper-cost").value)
+            paper = Number(((area * weight * cost) / 1000000).toFixed(3));
+
+            document.getElementById("paper-price").innerText = "= "+ paper +" 元/个"
+        }
+        function computePrint() {
+            num = Number(document.getElementById("price-number").value)
+            print = Number(document.getElementById("price-print").value)
+            printprice = Number((print / num).toFixed(3))
+            document.getElementById("print-price").innerText = "= "+ printprice +" 元/个"
+        }
+        function computeSkin() {
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+            skin = Number(document.getElementById("price-skin").value)
+            skinprice = Number((skin * area).toFixed(3))
+            document.getElementById("skin-price").innerText = "= "+ skinprice +" 元/个"
+        }
+        function computePlate() {
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+            plate = Number(document.getElementById("price-plate").value)
+            plateprice = Number((plate * area).toFixed(3))
+            document.getElementById("plate-price").innerText = "= "+ plateprice +" 元/个"
+        }
+        function computeKnife() {
+            num = Number(document.getElementById("price-number").value)
+            knife = Number(document.getElementById("price-knife").value)
+            knifeprice = Number((knife / num).toFixed(3))
+            document.getElementById("knife-price").innerText = "= "+ knifeprice +" 元/个"
         }
         function init() {
             document.getElementById("ans").innerText = "预估面积：无"
