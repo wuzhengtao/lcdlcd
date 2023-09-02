@@ -184,7 +184,7 @@
         </div>
         <div class="mdui-row">
             <div class="mdui-col-xs-2">
-                <h2>纸张：</h2>
+                <h2>纸板：</h2>
             </div>
             <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">纸张</label>
@@ -262,9 +262,12 @@
             C = parseInt(document.getElementById("size-height").value)
             sele = parseInt(document.getElementById("size").value)
             xiabanParam = [0,30,35,35,35]
-            xiaban = (A + B) * 2 + xiabanParam[sele]
-
             lineParam = [0,1,1,1,2]
+            xiaban1 = (((A + B) * 2 + xiabanParam[sele]) * 0.1).toFixed(2)
+            xiaban2 = ((B + C + 2 * lineParam[sele]) * 0.1).toFixed(2)
+            xiaban = xiaban1 * xiaban2
+
+            
             line1 = ((B * 0.5 + lineParam[sele]) * 0.1).toFixed(2)
             line2 = (C * 0.1).toFixed(2)
             document.getElementById("size-xiaban").innerText = "下板尺寸：" + xiaban
