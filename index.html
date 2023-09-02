@@ -51,6 +51,39 @@
     <a id="anchor-top"></a>
 
     <div class="mdui-container">
+        <h1>下料计算</h1>
+        <h1 class="mdui-text-color-theme">
+            选择层数：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="size">
+                <option value="1">1.B三层</option>
+                <option value="2">2.双E五层</option>
+                <option value="3">3.BE五层</option>
+                <option value="4">4.BC五层</option>
+            </select>
+        </h1>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">长</label>
+            <input class="mdui-textfield-input" id="size-length" onblur="checkNum1()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">宽</label>
+            <input class="mdui-textfield-input" id="size-width" onblur="checkNum1()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">高</label>
+            <input class="mdui-textfield-input" id="size-height" onblur="checkNum1()" />
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="size-xiaban">下板尺寸：无</span>
+                <br/>
+                <span class="mdui-text-color-theme" id="size-line">压线：无</span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculatorsize()">开始计算</button>
+            </div>
+        </div>
+        <div class="mdui-divider" style="margin-top:50pt"></div>
         <h1>面积计算</h1>
         <h1 class="mdui-text-color-theme">
             选择箱型：
@@ -86,7 +119,7 @@
                 <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculator()">开始计算</button>
             </div>
         </div>
-        <div class="mdui-divider" style="margin-top:10pt"></div>
+        <div class="mdui-divider" style="margin-top:50pt"></div>
         <div class="mdui-row">
             <div class="mdui-col-xs-4">
                 <h1>价格计算</h1>
@@ -212,6 +245,31 @@
                     init()
                 }
             }
+        }
+        function checkNum1() {
+            ids = ["size-length", "size-width", "size-height"]
+            for (i in ids) {
+                element = document.getElementById(ids[i]).value
+                if (isNaN(element)) {
+                    num = parseInt(i) + 1
+                    init()
+                }
+            }
+        }
+        function caculatorsize() {
+            A = parseInt(document.getElementById("size-length").value)
+            B = parseInt(document.getElementById("size-width").value)
+            C = parseInt(document.getElementById("size-height").value)
+            sele = parseInt(document.getElementById("size").value)
+            xiabanParam = [0,30,35,35,35]
+            xiaban = (A + B) * 2 + xiabanParam[sele]
+
+            lineParam = [0,1,1,1,2]
+            line1 = ((B * 0.5 + lineParam[sele]) * 0.1).toFixed(2)
+            line2 = (C * 0.1).toFixed(2)
+            document.getElementById("size-xiaban").innerText = "下板尺寸：" + xiaban
+            document.getElementById("size-line").innerText = "压线：" + line1 + " + " + line2 + " + " + line1
+
         }
         function caculator() {
             A = parseInt(document.getElementById("box-length").value)
