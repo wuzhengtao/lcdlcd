@@ -265,13 +265,14 @@
             lineParam = [0,1,1,1,2]
             xiaban1 = (((A + B) * 2 + xiabanParam[sele]) * 0.1).toFixed(2)
             xiaban2 = ((B + C + 2 * lineParam[sele]) * 0.1).toFixed(2)
-            xiaban = xiaban1 * xiaban2
+            xiaban = (xiaban1 * xiaban2 * 0.0001).toFixed(5)
 
             
             line1 = ((B * 0.5 + lineParam[sele]) * 0.1).toFixed(2)
             line2 = (C * 0.1).toFixed(2)
-            document.getElementById("size-xiaban").innerText = "下板尺寸：" + xiaban
-            document.getElementById("size-line").innerText = "压线：" + line1 + " + " + line2 + " + " + line1
+            document.getElementById("size-xiaban").innerText = "下板尺寸：" + xiaban1 + "(cm) * " + xiaban2 + "(cm) = " + xiaban
+            document.getElementById("size-xiaban").innerHTML += "(m<sup>2</sup>)"
+            document.getElementById("size-line").innerText = "压线：" + line1 + "(cm) + " + line2 + "(cm) + " + line1 + "(cm)"
 
         }
         function caculator() {
