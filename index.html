@@ -114,6 +114,8 @@
         <div class="mdui-row">
             <div class="mdui-col-xs-8">
                 <span class="mdui-text-color-theme" id="ans">预估面积：无</span>
+                <br/>
+                <span class="mdui-text-color-theme" id="msize">下料尺寸：无</span>
             </div>
             <div class="mdui-col-xs-4">
                 <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculator()">开始计算</button>
@@ -294,7 +296,15 @@
             value = ratio[sele - 1]
             length = A * value[0] + B * value[1] + C * value[2] + value[3]
             width = A * value[4] + B * value[5] + C * value[6] + value[7]
+            // 20240908 新增部分，飞机盒的幅宽-6
+            if (sele == 7) {
+                width = width - 6
+            }
             document.getElementById("ans").innerText = "预估面积：长 " + length + "，幅宽" + width + "，面积为：" + length * width / 1000000
+            // 20240908 增加下料尺寸
+            msize_length = length - 4
+            msize_width = width - 2
+            document.getElementById("msize").innerText = "下料尺寸： " + msize_length + " X " + msize_width 
         }
 
         function price_caculator() {
