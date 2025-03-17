@@ -68,6 +68,49 @@
             </div>
         </div>
         <div class="mdui-divider" style="margin-top:50pt"></div>
+        <h1>尺寸计算</h1>
+        <h1 class="mdui-text-color-theme">
+            选择层数：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box">
+                <option value="1">1.立箱</option>
+                <option value="2">2.2X3卧箱</option>
+                <option value="3">3.1X6平铺卧箱</option>
+                <option value="4">4.飞机盒</option>
+                <option value="4">5.天地盖</option>
+            </select>
+        </h1>
+        <h1 class="mdui-text-color-theme">
+            辅料格套选择：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="Accessories">
+                <option value="1">1.折叠纸托</option>
+                <option value="2">2.48蛋托</option>
+                <option value="3">3.51蛋托</option>
+                <option value="4">4.卡脖格套</option>
+            </select>
+        </h1>
+        <div class="mdui-row">
+            <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-6">
+                <label class="mdui-textfield-label ">直径</label>
+                <input class="mdui-textfield-input" id="bottle-diameter" onblur="checkNum1()" />
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-6">
+                <label class="mdui-textfield-label">瓶高</label>
+                <input class="mdui-textfield-input" id="bottle-height" onblur="checkNum1()" />
+            </div>
+        </div>
+        
+        
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="size-pre">预计尺寸：无</span>
+                <br/>
+                <span class="mdui-text-color-theme" id="warning"></span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculatorsize2()">开始计算</button>
+            </div>
+        </div>
+        <div class="mdui-divider" style="margin-top:50pt"></div>
         <h1>面积计算</h1>
         <h1 class="mdui-text-color-theme">
             选择箱型：
@@ -234,7 +277,7 @@
             }
         }
         function checkNum1() {
-            ids = ["size-length", "size-width", "size-height"]
+            ids = ["size-length", "size-width", "size-height","bottle-diameter","bottle-height"]
             for (i in ids) {
                 element = document.getElementById(ids[i]).value
                 if (isNaN(element)) {
@@ -260,6 +303,184 @@
             document.getElementById("size-xiaban").innerText = "下板尺寸：" + xiaban1 + "(cm) * " + xiaban2 + "(cm) = " + xiaban
             document.getElementById("size-xiaban").innerHTML += "(m<sup>2</sup>)"
             document.getElementById("size-line").innerText = "压线：" + line1 + "(cm) + " + line2 + "(cm) + " + line1 + "(cm)"
+
+        }
+
+        function caculatorsize2() {
+            init()
+            A = parseInt(document.getElementById("bottle-diameter").value)
+            B = parseInt(document.getElementById("bottle-height").value)
+            BoxSelect = parseInt(document.getElementById("box").value)
+            AccessoriesSelect = parseInt(document.getElementById("Accessories").value)
+            ret = sizecacu(A, B, BoxSelect, AccessoriesSelect)
+            document.getElementById("size-pre").innerText = "预计尺寸：长 " + ret.length + "(mm) * 宽 " + ret.width + "(mm) * 高 " + ret.height + "(mm) "
+            if (BoxSelect > 2 && AccessoriesSelect == 2 && A >= 82) {
+                document.getElementById("warning").innerText = "注意：48蛋托尺寸超标，需改用51蛋托"
+            }
+
+        }
+        function sizecacu(diameter, height, box, accessories) {
+             if (box == 1) {
+                return {
+                    "length": diameter * 3 + 13,
+                    "width": diameter * 2 + 10,
+                    "height": height + 10
+                }
+             }
+             if (box == 2) {
+                return {
+                    "length": height + 18,
+                    "width": diameter * 3 + 10,
+                    "height": diameter * 2 + 12
+                }
+             }
+             if (box == 3) {
+                s_length = diameter * 6 + 28
+                s_width = height + 8
+                s_height = diameter + 12
+                if (accessories == 1) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height
+                    }
+                }
+                if (accessories == 2) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 490,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 20,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 3) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 520,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 20,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 4) {
+                    return {
+                        "length": s_length - 8,
+                        "width": s_width,
+                        "height": s_height + 6
+                    }
+                }
+             }
+             if (box == 4) {
+                s_length = diameter * 6 + 45
+                s_width = height + 8
+                s_height = diameter + 7
+                if (accessories == 1) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height
+                    }
+                }
+                if (accessories == 2) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 510,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 35,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 3) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 540,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 35,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 4) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height + 6
+                    }
+                }
+             }
+             if (box == 5) {
+                s_length = diameter * 6 + 45
+                s_width = height + 19
+                s_height = diameter + 4
+                if (accessories == 1) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height
+                    }
+                }
+                if (accessories == 2) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 505,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": s_length,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 3) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 535,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": s_length,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 4) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height + 6
+                    }
+                }
+             }
 
         }
         function caculator() {
@@ -366,6 +587,8 @@
         function init() {
             document.getElementById("ans").innerText = "预估面积：无"
             document.getElementById("price").innerText = "预估价格：无"
+            document.getElementById("size-pre").innerText = "预计尺寸：无"
+            document.getElementById("warning").innerText = ""
         }
     </script>
     <script src="//cdn.w3cbus.com/mdui.org/docs/assets/docs/js/docs-v1.js"></script>
