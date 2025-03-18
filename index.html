@@ -114,7 +114,7 @@
         <h1>面积计算</h1>
         <h1 class="mdui-text-color-theme">
             选择箱型：
-            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box">
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box1">
                 <option value="1">1.一片成箱立箱</option>
                 <option value="2">2.两片成箱立箱</option>
                 <option value="3">3.小盖卧箱</option>
@@ -487,7 +487,7 @@
             A = parseInt(document.getElementById("box-length").value)
             B = parseInt(document.getElementById("box-width").value)
             C = parseInt(document.getElementById("box-height").value)
-            sele = parseInt(document.getElementById("box").value)
+            sele = parseInt(document.getElementById("box1").value)
             ratio = [
                 [2, 2, 0, 40, 0, 1, 1, 20],
                 [1, 1, 0, 40, 0, 1, 1, 20],
