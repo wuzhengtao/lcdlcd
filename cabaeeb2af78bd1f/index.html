@@ -10,7 +10,7 @@
     <!-- MDUI CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/css/mdui.min.css"
         integrity="sha384-2PJ2u4NYg6jCNNpv3i1hK9AoAqODy6CdiC+gYiL2DVx+ku5wzJMFNdE3RoWfBIRP" crossorigin="anonymous" />
-    <title>Title</title>
+    <title>烟台壹盒包装制品有限公司</title>
     <!-- MDUI JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"
         integrity="sha384-aB8rnkAu/GBsQ1q6dwTySnlrrbhqDwrDnpVHR2Wgm8pWLbwUnzDcIROX3VvCbaK+"
@@ -21,7 +21,7 @@
 <body
     class="mdui-drawer-body-left mdui-appbar-with-toolbar  mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto">
     <header class="mdui-appbar mdui-appbar-fixed">
-        <!-- <div class="mdui-toolbar mdui-color-theme">
+        <div class="mdui-toolbar mdui-color-theme">
             <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
                 mdui-drawer="{target: '#main-drawer', swipe: true}"><i class="mdui-icon material-icons">menu</i></span>
             <a href="../" class="mdui-typo-headline mdui-hidden-xs">烟台壹盒包装制品有限公司</a>
@@ -29,13 +29,13 @@
             <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white"
                 mdui-dialog="{target: '#dialog-docs-theme'}" mdui-tooltip="{content: '设置主题'}"><i
                     class="mdui-icon material-icons">color_lens</i></span>
-        </div> -->
+        </div>
     </header>
 
     <a id="anchor-top"></a>
 
     <div class="mdui-container">
-        <!-- <h1>下料计算</h1>
+        <h1>下料计算</h1>
         <h1 class="mdui-text-color-theme">
             选择层数：
             <select class="mdui-select" mdui-select="{position: 'bottom'}" id="size">
@@ -67,8 +67,8 @@
                 <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculatorsize()">开始计算</button>
             </div>
         </div>
-        <div class="mdui-divider" style="margin-top:50pt"></div> -->
-        <!-- <h1>尺寸计算</h1>
+        <div class="mdui-divider" style="margin-top:50pt"></div>
+        <h1>尺寸计算</h1>
         <h1 class="mdui-text-color-theme">
             选择层数：
             <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box">
@@ -147,17 +147,17 @@
             <div class="mdui-col-xs-4">
                 <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculator()">开始计算</button>
             </div>
-        </div> -->
+        </div>
         <div class="mdui-divider" style="margin-top:50pt"></div>
         <div class="mdui-row">
-            <div class="mdui-col-xs-12">
+            <div class="mdui-col-xs-4">
                 <h1>价格计算</h1>
             </div>
-            <!-- <div class="mdui-col-xs-8">
+            <div class="mdui-col-xs-8">
                 <div class="mdui-textfield">
                     <input class="mdui-textfield-input" type="text" placeholder="备注"/>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="mdui-textfield mdui-textfield-floating-label">
             <label class="mdui-textfield-label">数量</label>
@@ -211,7 +211,7 @@
                 <h2 id="skin-price">= 0 元/个</h2>
             </div>
         </div>
-        <!-- <div class="mdui-row">
+        <div class="mdui-row">
             <div class="mdui-col-xs-2">
                 <h2>纸板：</h2>
             </div>
@@ -222,7 +222,7 @@
             <div class="mdui-col-xs-2">
                 <h2 id="plate-price">= 0 元/个</h2>
             </div>
-        </div> -->
+        </div>
         <div class="mdui-row">
             <div class="mdui-col-xs-2">
                 <h2>刀版：</h2>
@@ -236,15 +236,15 @@
             </div>
         </div>
         <div class="mdui-row">
-            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">加工</label>
                 <input class="mdui-textfield-input" id="price-work" />
             </div>
-            <!-- <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">格套</label>
                 <input class="mdui-textfield-input" id="price-pattern" />
-            </div> -->
-            <div class="mdui-col-xs-6 mdui-textfield mdui-textfield-floating-label">
+            </div>
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
                 <label class="mdui-textfield-label">其他</label>
                 <input class="mdui-textfield-input" id="price-other" />
             </div>
@@ -526,10 +526,10 @@
 
             print = Number(document.getElementById("price-print").value)
             skin = Number(document.getElementById("price-skin").value)
-            // plate = Number(document.getElementById("price-plate").value)
+            plate = Number(document.getElementById("price-plate").value)
             knife = Number(document.getElementById("price-knife").value)
             work = Number(document.getElementById("price-work").value)
-            // pattern = Number(document.getElementById("price-pattern").value)
+            pattern = Number(document.getElementById("price-pattern").value)
             other = Number(document.getElementById("price-other").value)
 
             price =
@@ -537,10 +537,10 @@
                     this.paper +
                     Number((print / num).toFixed(3)) +
                     Number((skin * area).toFixed(3)) +
-                    // Number((plate * area).toFixed(3)) +
+                    Number((plate * area).toFixed(3)) +
                     Number((knife / num).toFixed(3)) +
                     work * 1.0 +
-                    // pattern * 1.0 +
+                    pattern * 1.0 +
                     other * 1.0
                 ).toFixed(3);
             document.getElementById("price").innerText = "预估价格： " + price + " 元";
