@@ -15,14 +15,6 @@
     <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"
         integrity="sha384-aB8rnkAu/GBsQ1q6dwTySnlrrbhqDwrDnpVHR2Wgm8pWLbwUnzDcIROX3VvCbaK+"
         crossorigin="anonymous"></script>
-    <script type="text/JavaScript" src="../js/MaterialCalculation.js"></script>
-    <script type="text/JavaScript" src="../js/SizeCalculation.js"></script>
-    <script type="text/JavaScript" src="../js/AreaCalculation.js"></script>
-    <script type="text/JavaScript" src="../js/PriceCalculation.js"></script>
-    <script type="text/JavaScript" src="../js/utils.js"></script>
-    <script type="text/JavaScript" src="../js/createpage.js"></script>
-
-
 
 </head>
 
@@ -43,39 +35,567 @@
     <a id="anchor-top"></a>
 
     <div class="mdui-container">
-        <div class="mdui-container" id="material-calculation" style="display: none;"></div>
-        <div class="mdui-container" id="size-calculation" style="display: none;"></div>
-        <div class="mdui-container" id="area-calculation" style="display: none;"></div>
-        <div class="mdui-container" id="price-calculation" style="display: none;"></div>
+        <h1>下料计算</h1>
+        <h1 class="mdui-text-color-theme">
+            选择层数：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="size">
+                <option value="1">1.B三层</option>
+                <option value="2">2.双E五层</option>
+                <option value="3">3.BE五层</option>
+                <option value="4">4.BC五层</option>
+            </select>
+        </h1>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">长</label>
+            <input class="mdui-textfield-input" id="size-length" onblur="checkNum1()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">宽</label>
+            <input class="mdui-textfield-input" id="size-width" onblur="checkNum1()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">高</label>
+            <input class="mdui-textfield-input" id="size-height" onblur="checkNum1()" />
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="size-xiaban">下板尺寸：无</span>
+                <br/>
+                <span class="mdui-text-color-theme" id="size-line">压线：无</span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculatorsize()">开始计算</button>
+            </div>
+        </div>
+        <div class="mdui-divider" style="margin-top:50pt"></div>
+        <h1>尺寸计算</h1>
+        <h1 class="mdui-text-color-theme">
+            选择层数：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box">
+                <option value="1">1.立箱</option>
+                <option value="2">2.2X3卧箱</option>
+                <option value="3">3.1X6平铺卧箱</option>
+                <option value="4">4.飞机盒</option>
+                <option value="4">5.天地盖</option>
+            </select>
+        </h1>
+        <h1 class="mdui-text-color-theme">
+            辅料格套选择：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="Accessories">
+                <option value="1">1.折叠纸托</option>
+                <option value="2">2.48蛋托</option>
+                <option value="3">3.51蛋托</option>
+                <option value="4">4.卡脖格套</option>
+            </select>
+        </h1>
+        <div class="mdui-row">
+            <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-6">
+                <label class="mdui-textfield-label ">直径</label>
+                <input class="mdui-textfield-input" id="bottle-diameter" onblur="checkNum1()" />
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-6">
+                <label class="mdui-textfield-label">瓶高</label>
+                <input class="mdui-textfield-input" id="bottle-height" onblur="checkNum1()" />
+            </div>
+        </div>
+        
+        
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="size-pre">预计尺寸：无</span>
+                <br/>
+                <span class="mdui-text-color-theme" id="warning"></span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculatorsize2()">开始计算</button>
+            </div>
+        </div>
+        <div class="mdui-divider" style="margin-top:50pt"></div>
+        <h1>面积计算</h1>
+        <h1 class="mdui-text-color-theme">
+            选择箱型：
+            <select class="mdui-select" mdui-select="{position: 'bottom'}" id="box1">
+                <option value="1">1.一片成箱立箱</option>
+                <option value="2">2.两片成箱立箱</option>
+                <option value="3">3.小盖卧箱</option>
+                <option value="4">4.大盖卧箱</option>
+                <option value="5">5.平铺六支对箱</option>
+                <option value="6">6.鲅鱼箱</option>
+                <option value="7">7.飞机盒</option>
+                <option value="8">8.天盖</option>
+                <option value="9">9.地盖</option>
+                <option value="10">10.一片成手提袋</option>
+                <option value="11">11.两片成手提袋</option>
+            </select>
+        </h1>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">长</label>
+            <input class="mdui-textfield-input" id="box-length" onblur="checkNum()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">宽</label>
+            <input class="mdui-textfield-input" id="box-width" onblur="checkNum()" />
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">高</label>
+            <input class="mdui-textfield-input" id="box-height" onblur="checkNum()" />
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="ans">预估面积：无</span>
+                <br/>
+                <span class="mdui-text-color-theme" id="msize">下料尺寸：无</span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="caculator()">开始计算</button>
+            </div>
+        </div>
+        <div class="mdui-divider" style="margin-top:50pt"></div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-4">
+                <h1>价格计算</h1>
+            </div>
+            <div class="mdui-col-xs-8">
+                <div class="mdui-textfield">
+                    <input class="mdui-textfield-input" type="text" placeholder="备注"/>
+                </div>
+            </div>
+        </div>
+        <div class="mdui-textfield mdui-textfield-floating-label">
+            <label class="mdui-textfield-label">数量</label>
+            <input class="mdui-textfield-input" id="price-number" />
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>面纸费用：</h2>
+            </div>
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">面积：长</label>
+                <input class="mdui-textfield-input" id="price-length" onblur="computePaper()"/>
+            </div>
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">面积：宽</label>
+                <input class="mdui-textfield-input" id="price-width" onblur="computePaper()" />
+            </div>
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">克重</label>
+                <input class="mdui-textfield-input" id="price-paper-weight" onblur="computePaper()" />
+            </div>
+            <div class="mdui-col-xs-2 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">费用</label>
+                <input class="mdui-textfield-input" id="price-paper-cost" onblur="computePaper()" />
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="paper-price">= 0 元/个</h2>
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>印刷：</h2>
+            </div>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">印刷</label>
+                <input class="mdui-textfield-input" id="price-print" onblur="computePrint()"/>
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="print-price">= 0 元/个</h2>
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>膜：</h2>
+            </div>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">膜</label>
+                <input class="mdui-textfield-input" id="price-skin" onblur="computeSkin()" />
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="skin-price">= 0 元/个</h2>
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>纸板：</h2>
+            </div>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">纸张</label>
+                <input class="mdui-textfield-input" id="price-plate" onblur="computePlate()"/>
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="plate-price">= 0 元/个</h2>
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-2">
+                <h2>刀版：</h2>
+            </div>
+            <div class="mdui-col-xs-8 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">刀版</label>
+                <input class="mdui-textfield-input" id="price-knife" onblur="computeKnife()"/>
+            </div>
+            <div class="mdui-col-xs-2">
+                <h2 id="knife-price">= 0 元/个</h2>
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">加工</label>
+                <input class="mdui-textfield-input" id="price-work" />
+            </div>
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">格套</label>
+                <input class="mdui-textfield-input" id="price-pattern" />
+            </div>
+            <div class="mdui-col-xs-4 mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">其他</label>
+                <input class="mdui-textfield-input" id="price-other" />
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-xs-8">
+                <span class="mdui-text-color-theme" id="price">预估价格：无</span>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button class="mdui-btn mdui-color-theme-accent mdui-ripple" onclick="price_caculator()">开始计算</button>
+            </div>
+        </div>
+    </div>
 
-        <script src="//cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.polyfills.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/holderjs@2.9.7/holder.min.js"></script>
-        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"></script>
-        <script>
-            var $ = mdui.$;
-            window.onload = function () {
-                createMC(document.getElementById("material-calculation"));// material-calculation 物料计算
-                createSC(document.getElementById("size-calculation"));// size-calculation 尺寸计算
-                createAC(document.getElementById("area-calculation"));// area-calculation 面积计算
-                createPC(document.getElementById("price-calculation"));// price-calculation 价格计算
-                moduleswitch = {
-                    // 刘承东自己使用，模块全开
-                    "material-calculation": true,
-                    "size-calculation": true,
-                    "area-calculation": true,
-                    "price-calculation": true
+    <script src="//cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/holderjs@2.9.7/holder.min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/mdui@1.0.0/dist/js/mdui.min.js"></script>
+    <script>
+        var $ = mdui.$;
+
+        function checkNum() {
+            ids = ["box-length", "box-width", "box-height"]
+            for (i in ids) {
+                element = document.getElementById(ids[i]).value
+                if (isNaN(element)) {
+                    num = parseInt(i) + 1
+                    init()
                 }
-                for (var key in moduleswitch) {
-                    if (moduleswitch[key]) {
-                        document.getElementById(key).style = "display: block;";
+            }
+        }
+        function checkNum1() {
+            ids = ["size-length", "size-width", "size-height","bottle-diameter","bottle-height"]
+            for (i in ids) {
+                element = document.getElementById(ids[i]).value
+                if (isNaN(element)) {
+                    num = parseInt(i) + 1
+                    init()
+                }
+            }
+        }
+        function caculatorsize() {
+            A = parseInt(document.getElementById("size-length").value)
+            B = parseInt(document.getElementById("size-width").value)
+            C = parseInt(document.getElementById("size-height").value)
+            sele = parseInt(document.getElementById("size").value)
+            xiabanParam = [0,30,35,35,35]
+            lineParam = [0,1,1,1,2]
+            xiaban1 = (((A + B) * 2 + xiabanParam[sele]) * 0.1).toFixed(2)
+            xiaban2 = ((B + C + 2 * lineParam[sele]) * 0.1).toFixed(2)
+            xiaban = (xiaban1 * xiaban2 * 0.0001).toFixed(5)
+
+            
+            line1 = ((B * 0.5 + lineParam[sele]) * 0.1).toFixed(2)
+            line2 = (C * 0.1).toFixed(2)
+            document.getElementById("size-xiaban").innerText = "下板尺寸：" + xiaban1 + "(cm) * " + xiaban2 + "(cm) = " + xiaban
+            document.getElementById("size-xiaban").innerHTML += "(m<sup>2</sup>)"
+            document.getElementById("size-line").innerText = "压线：" + line1 + "(cm) + " + line2 + "(cm) + " + line1 + "(cm)"
+
+        }
+
+        function caculatorsize2() {
+            init()
+            A = parseInt(document.getElementById("bottle-diameter").value)
+            B = parseInt(document.getElementById("bottle-height").value)
+            BoxSelect = parseInt(document.getElementById("box").value)
+            AccessoriesSelect = parseInt(document.getElementById("Accessories").value)
+            ret = sizecacu(A, B, BoxSelect, AccessoriesSelect)
+            document.getElementById("size-pre").innerText = "预计尺寸：长 " + ret.length + "(mm) * 宽 " + ret.width + "(mm) * 高 " + ret.height + "(mm) "
+            if (BoxSelect > 2 && AccessoriesSelect == 2 && A >= 82) {
+                document.getElementById("warning").innerText = "注意：48蛋托尺寸超标，需改用51蛋托"
+            }
+
+        }
+        function sizecacu(diameter, height, box, accessories) {
+             if (box == 1) {
+                return {
+                    "length": diameter * 3 + 13,
+                    "width": diameter * 2 + 10,
+                    "height": height + 10
+                }
+             }
+             if (box == 2) {
+                return {
+                    "length": height + 8,
+                    "width": diameter * 3 + 10,
+                    "height": diameter * 2 + 12
+                }
+             }
+             if (box == 3) {
+                s_length = diameter * 6 + 28
+                s_width = height + 8
+                s_height = diameter + 12
+                if (accessories == 1) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height
                     }
                 }
-            };
+                if (accessories == 2) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 490,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 20,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 3) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 520,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 20,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 4) {
+                    return {
+                        "length": s_length - 8,
+                        "width": s_width,
+                        "height": s_height + 6
+                    }
+                }
+             }
+             if (box == 4) {
+                s_length = diameter * 6 + 45
+                s_width = height + 8
+                s_height = diameter + 7
+                if (accessories == 1) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height
+                    }
+                }
+                if (accessories == 2) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 510,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 35,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 3) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 540,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": diameter * 6 + 35,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 4) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height + 6
+                    }
+                }
+             }
+             if (box == 5) {
+                s_length = diameter * 6 + 45
+                s_width = height + 19
+                s_height = diameter + 4
+                if (accessories == 1) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height
+                    }
+                }
+                if (accessories == 2) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 505,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": s_length,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 3) {
+                    if (diameter <= 82) {
+                        return {
+                            "length": 535,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    } else {
+                        return {
+                            "length": s_length,
+                            "width": s_width,
+                            "height": s_height
+                        }
+                    }
+                }
+                if (accessories == 4) {
+                    return {
+                        "length": s_length,
+                        "width": s_width,
+                        "height": s_height + 6
+                    }
+                }
+             }
 
-        </script>
-        <script src="//cdn.w3cbus.com/mdui.org/docs/assets/docs/js/docs-v1.js"></script>
+        }
+        function caculator() {
+            A = parseInt(document.getElementById("box-length").value)
+            B = parseInt(document.getElementById("box-width").value)
+            C = parseInt(document.getElementById("box-height").value)
+            sele = parseInt(document.getElementById("box1").value)
+            ratio = [
+                [2, 2, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 1, 0, 40, 1, 0, 1, 20],
+                [1, 1, 0, 40, 0, 1, 1, 20],
+                [1, 0, 4, 32, 0, 2, 2, 20],
+                [0, 2, 3, 21, 1, 0, 4, 42],
+                [1, 0, 4, 67, 0, 1, 4, 51],
+                [1, 0, 4, 34, 0, 1, 4, 24],
+                [2, 2, 0, 30, 0, 0.5, 1, 80],
+                [1, 1, 0, 30, 0, 0.5, 1, 80]
+            ]
+            value = ratio[sele - 1]
+            length = A * value[0] + B * value[1] + C * value[2] + value[3]
+            width = A * value[4] + B * value[5] + C * value[6] + value[7]
+            // 20240908 新增部分，飞机盒的幅宽-6
+            if (sele == 7) {
+                width = width - 6
+            }
+            document.getElementById("ans").innerText = "预估面积：长 " + length + "，幅宽" + width + "，面积为：" + length * width / 1000000
+            // 20240908 增加下料尺寸
+            msize_length = length - 4
+            msize_width = width - 2
+            document.getElementById("msize").innerText = "下料尺寸： " + msize_length + " X " + msize_width 
+        }
 
+        function price_caculator() {
+            num = Number(document.getElementById("price-number").value)
+
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+
+            weight = Number(document.getElementById("price-paper-weight").value)
+            cost = Number(document.getElementById("price-paper-cost").value)
+            paper = Number(((area * weight * cost) / 1000000).toFixed(3));
+
+            print = Number(document.getElementById("price-print").value)
+            skin = Number(document.getElementById("price-skin").value)
+            plate = Number(document.getElementById("price-plate").value)
+            knife = Number(document.getElementById("price-knife").value)
+            work = Number(document.getElementById("price-work").value)
+            pattern = Number(document.getElementById("price-pattern").value)
+            other = Number(document.getElementById("price-other").value)
+
+            price =
+                (
+                    this.paper +
+                    Number((print / num).toFixed(3)) +
+                    Number((skin * area).toFixed(3)) +
+                    Number((plate * area).toFixed(3)) +
+                    Number((knife / num).toFixed(3)) +
+                    work * 1.0 +
+                    pattern * 1.0 +
+                    other * 1.0
+                ).toFixed(3);
+            document.getElementById("price").innerText = "预估价格： " + price + " 元";
+        }
+        function computePaper() {
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+
+            weight = Number(document.getElementById("price-paper-weight").value)
+            cost = Number(document.getElementById("price-paper-cost").value)
+            paper = Number(((area * weight * cost) / 1000000).toFixed(3));
+
+            document.getElementById("paper-price").innerText = "= "+ paper +" 元/个"
+        }
+        function computePrint() {
+            num = Number(document.getElementById("price-number").value)
+            print = Number(document.getElementById("price-print").value)
+            printprice = Number((print / num).toFixed(3))
+            document.getElementById("print-price").innerText = "= "+ printprice +" 元/个"
+        }
+        function computeSkin() {
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+            skin = Number(document.getElementById("price-skin").value)
+            skinprice = Number((skin * area).toFixed(3))
+            document.getElementById("skin-price").innerText = "= "+ skinprice +" 元/个"
+        }
+        function computePlate() {
+            price_length = Number(document.getElementById("price-length").value)
+            price_width = Number(document.getElementById("price-width").value)
+            area = Number(((price_length * price_width) / 10000).toFixed(3))
+            plate = Number(document.getElementById("price-plate").value)
+            plateprice = Number((plate * area).toFixed(3))
+            document.getElementById("plate-price").innerText = "= "+ plateprice +" 元/个"
+        }
+        function computeKnife() {
+            num = Number(document.getElementById("price-number").value)
+            knife = Number(document.getElementById("price-knife").value)
+            knifeprice = Number((knife / num).toFixed(3))
+            document.getElementById("knife-price").innerText = "= "+ knifeprice +" 元/个"
+        }
+        function init() {
+            document.getElementById("ans").innerText = "预估面积：无"
+            document.getElementById("price").innerText = "预估价格：无"
+            document.getElementById("size-pre").innerText = "预计尺寸：无"
+            document.getElementById("warning").innerText = ""
+        }
+    </script>
+    <script src="//cdn.w3cbus.com/mdui.org/docs/assets/docs/js/docs-v1.js"></script>
 </body>
 
 </html>
